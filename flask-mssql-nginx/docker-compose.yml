@@ -1,0 +1,47 @@
+﻿version: '3'
+services:
+  flask-app:
+    build: 
+      context: .
+      dockerfile: app.dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - mssql-db
+    networks:
+      - my-network
+    environment:
+      - DB_SERVER=mssql-db 
+      - DB_NAME=deneme
+      - DB_USERNAME=sa
+      - DB_PASSWORD=Neonoir7788.
+
+  mssql-db:
+    build:
+      context: .
+      dockerfile: mssql.dockerfile
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Neonoir7788.
+      - MSSQL_PID=Developer
+      - MSSQL_AGENT_ENABLED=True
+
+    networks:
+      - my-network
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - flask-app
+    networks:
+      - my-network
+
+networks:
+  my-network:

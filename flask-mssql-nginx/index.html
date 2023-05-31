@@ -1,0 +1,124 @@
+﻿<html>
+    <head>
+        <title>Flask Uygulaması</title>
+        <style>
+            /* CSS stillerini burada tanımlayabilirsiniz */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+            }
+            .calculator {
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .calculator input[type="number"] {
+                padding: 10px;
+                margin-bottom: 10px;
+                width: 200px;
+                border-radius: 3px;
+                border: 1px solid #ccc;
+            }
+            .calculator select {
+                padding: 10px;
+                margin-bottom: 10px;
+                width: 100px;
+                border-radius: 3px;
+                border: 1px solid #ccc;
+            }
+            .calculator button {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .calculator button:hover {
+                background-color: #0056b3;
+            }
+            .result {
+                margin-top: 20px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .request-section {
+                width: 50%;
+                margin-top: 64px;
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 42px;
+                padding: 35px;
+            }
+            .request-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+            .request-table th, .request-table td {
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <div class="container">
+            <h1>Flask Uygulaması</h1>
+            <div class="calculator">
+                <h2>Hesap Makinesi</h2>
+                <form method="GET" action="/">
+                    <input type="number" name="num1" placeholder="Sayı 1" required>
+                    <select name="operator">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">*</option>
+                        <option value="/">/</option>
+                    </select>
+                    <input type="number" name="num2" placeholder="Sayı 2" required>
+                    <button type="submit">Hesapla</button>
+                </form>
+                {% if result is not none %}
+                    <div class="result">Sonuç: {{ result }}</div>
+                {% endif %}
+            </div>
+            <div class="request-section">
+                <h2>Son İstekler</h2>
+                <table class="request-table">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>IP Adresi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in rows %}
+                            <tr>
+                                <td>{{ row.date }}</td>
+                                <td>{{ row.ip }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+    </html>
