@@ -12,9 +12,9 @@ services:
       - my-network
     environment:
       - DB_SERVER=mssql-db 
-      - DB_NAME=deneme
+      - DB_NAME=database
       - DB_USERNAME=sa
-      - DB_PASSWORD=Neonoir7788.
+      - DB_PASSWORD=Example123.
 
   mssql-db:
     build:
@@ -24,7 +24,7 @@ services:
       - 1433:1433
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Neonoir7788.
+      - SA_PASSWORD=Example123.
       - MSSQL_PID=Developer
       - MSSQL_AGENT_ENABLED=True
 
