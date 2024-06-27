@@ -7,20 +7,20 @@ from werkzeug.serving import WSGIRequestHandler
 
 app = Flask(__name__)
 
-# Veritabanı bağlantısı için gerekli bilgileri güncelleyin
+# Veritabanı bağlantısı için gerekli bilgiler
 server = os.environ.get('DB_SERVER')
 database = os.environ.get('DB_NAME')
 username = os.environ.get('DB_USERNAME')
 password = os.environ.get('DB_PASSWORD')
 
-# Veritabanı bağlantısını oluştur
+# Veritabanı bağlantısı
 def create_connection():
     connection_string = f"DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={server};UID={username};PWD={password};Encrypt=yes;TrustServerCertificate=yes"
     cnxn = pyodbc.connect(connection_string, autocommit=True)
     return cnxn
 
 
-# Veritabanını oluştur
+# Veritabanı
 def create_database():
     cnxn = create_connection()
     cursor = cnxn.cursor()
@@ -43,7 +43,7 @@ def create_database():
     return is_database_created
 
 
-# Tabloyu oluştur
+
 def create_table():
     cnxn = create_connection()
     cursor = cnxn.cursor()
@@ -68,7 +68,7 @@ def create_table():
     cursor.close()
     cnxn.close()
 
-# Veritabanı ve tablolarını oluştur
+
 is_database_created = create_database()
 
 if is_database_created:
@@ -111,7 +111,6 @@ def index():
     cnxn.close()
 
 
-    # Render template ve sonuçları döndür
     return render_template('index.html', result=result, rows=rows)
 
 if __name__ == '__main__':
