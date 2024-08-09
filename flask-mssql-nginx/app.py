@@ -25,7 +25,7 @@ def create_database():
     cnxn = create_connection()
     cursor = cnxn.cursor()
 
-    # Veritabanının var olup olmadığını kontrol et
+  
     cursor.execute(f"SELECT DB_ID('{database}')")
     result = cursor.fetchone()
     if result[0] is None:
@@ -48,10 +48,10 @@ def create_table():
     cnxn = create_connection()
     cursor = cnxn.cursor()
 
-    # Veritabanına bağlan
+
     cursor.execute(f"USE {database}")
 
-    # Kullanıcılar tablosunu oluştur
+    # Kullanıcılar tablosu
     create_table_query = '''
     IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'istekler')
     BEGIN
@@ -76,7 +76,7 @@ if is_database_created:
 
 @app.route('/')
 def index():
-    # Gelen isteği al
+
     ip = request.headers.get('X-Forwarded-For', request.remote_addr)
     date = datetime.now()
 
